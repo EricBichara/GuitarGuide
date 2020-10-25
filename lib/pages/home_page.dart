@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:guitar_tutor_win/core/notes.dart';
-import 'package:guitar_tutor_win/widgets/board.dart';
-import 'package:guitar_tutor_win/widgets/chord_progression.dart';
+import 'package:guitar_guide/core/notes.dart';
+import 'package:guitar_guide/widgets/board.dart';
+import 'package:guitar_guide/widgets/chord_progression.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Board'),
+        title: Text('Guitar Guide'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

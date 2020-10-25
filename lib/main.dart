@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:guitar_tutor_win/pages/home_page.dart';
+import 'package:guitar_guide/pages/home_page.dart';
 
 void main() => runApp(MyApp());
 

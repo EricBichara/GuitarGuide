@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:guitar_tutor_win/core/notes.dart';
+import 'package:guitar_guide/core/notes.dart';
 
 class ChordProgression extends StatefulWidget {
   final String scaleKey;
