@@ -21,9 +21,17 @@ class Notes {
       'Dorian b2': convertScale([Note.root, Note.b2, Note.b3, Note.p4, Note.p5, Note.M6, Note.b7]),
       'Lydian Augmented': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.b6, Note.M6, Note.M7]),
       'Lydian Dominant': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.b7]),
-      'Mixolydian b6': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.M7]),
+      'Mixolydian b6': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.b6, Note.b7]),
       'Aeolian b5': convertScale([Note.root, Note.M2, Note.b3, Note.p4, Note.b5, Note.b6, Note.b7]),
       'Altered': convertScale([Note.root, Note.b2, Note.b3, Note.M3, Note.b5, Note.b6, Note.b7]),
+      //Harmonic Minor Modes W-H-W-W-H-WH-H
+      'Harmonic Minor': convertScale([Note.root, Note.M2, Note.b3, Note.p4, Note.p5, Note.b6, Note.M7]),
+      'Locrian #6': convertScale([Note.root, Note.b2, Note.b3, Note.p4, Note.b5, Note.M6, Note.b7]),
+      'Ionian #5': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.b6, Note.M6, Note.M7]),
+      'Dorian #4': convertScale([Note.root, Note.M2, Note.b3, Note.b5, Note.p5, Note.M6, Note.b7]),
+      'Phrygian Dominant': convertScale([Note.root, Note.b2, Note.M3, Note.p4, Note.p5, Note.b6, Note.b7]),
+      'Lydian #2': convertScale([Note.root, Note.b3, Note.M3, Note.b5, Note.p5, Note.M6, Note.M7]),
+      'Super Locrian': convertScale([Note.root, Note.b2, Note.b3, Note.M3, Note.b5, Note.b6, Note.M6]),
     };
 
     chords = {
@@ -40,10 +48,10 @@ class Notes {
       'Major 6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
       'Major 11': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.p4]),
       'Major b5': convertScale([Note.root, Note.M3, Note.b5]),
-      'Minor 9': convertScale([Note.root, Note.M3, Note.p5, Note.b2]),
-      'Minor 11': convertScale([Note.root, Note.M3, Note.p5, Note.p4]),
+      'Minor 9': convertScale([Note.root, Note.b3, Note.p5, Note.b2]),
+      'Minor 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
       'Dominant 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
-      'Dominant 11': convertScale([Note.root, Note.p5, Note.b7, Note.p4]),
+      'Dominant 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
     };
   }
 
@@ -92,7 +100,7 @@ class Notes {
     return convertedNotes;
   }
 
-  String getScaleFormula(List<int> notes) {
+  String getScaleFormula(List<int> notes, bool isChord) {
     List<String> formula = [];
 
     for (int i = 0; i < notes.length; i++) {
@@ -115,7 +123,11 @@ class Notes {
           formula.add("b3");
           break;
         case 5:
-          formula.add("3");
+          if(notes[i-1] == 4 && isChord == false){
+            formula.add("b4");
+          }else{
+            formula.add("3");
+          }
           break;
         case 6:
           if (notes[i - 1] < note) {
@@ -125,13 +137,21 @@ class Notes {
           }
           break;
         case 7:
-          formula.add("b5");
+          if(notes[i-1] != 6 && formula.last != 'b4' && isChord == false){
+            formula.add("#4");
+          }else {
+            formula.add("b5");
+          }
           break;
         case 8:
           formula.add("5");
           break;
         case 9:
-          formula.add("b6");
+          if(notes[i+1] == 10 && isChord == false){
+            formula.add("#5");
+          }else{
+            formula.add("b6");
+          }
           break;
         case 10:
           if (notes[i - 1] < note) {
@@ -153,7 +173,7 @@ class Notes {
 
   String getChordFormula(String chord) {
     List<int> chordNotes = chords.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == chord).value;
-    return getScaleFormula(chordNotes);
+    return getScaleFormula(chordNotes, true);
   }
 
   List<int> getChordIntervals(List<int> chordNotes) {

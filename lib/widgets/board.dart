@@ -24,7 +24,10 @@ class _BoardState extends State<Board> {
   List<List<String>> stringsNotes = [];
   String chordFormula = "";
 
+  Map<String, String> noteIntervalMap = Map<String, String>();
+
   bool isLefty = true;
+  bool showInterval = false;
 
   Color darkBlue = Color.fromRGBO(0, 48, 73, 1);
   Color red = Color.fromRGBO(214, 40, 40, 1);
@@ -79,6 +82,14 @@ class _BoardState extends State<Board> {
     }
 
     chordFormula = notes.getChordFormula(widget.chord);
+    createNoteIntervalMap();
+  }
+
+  void createNoteIntervalMap(){
+    List<String> cf = chordFormula.split(' - ');
+    for(int i = 0; i<cf.length; i++){
+      noteIntervalMap[highlightedNotes[i]] = cf[i];
+    }
   }
 
   @override
@@ -91,6 +102,8 @@ class _BoardState extends State<Board> {
         children: [
           Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
                 width: 500,
@@ -109,6 +122,18 @@ class _BoardState extends State<Board> {
                     });
                   }),
               Text('Left-handed'),
+              SizedBox(
+                width: 90,
+              ),
+              Text('Note'),
+              PlatformSwitch(
+                  value: showInterval,
+                  onChanged: (bool value) {
+                    setState(() {
+                      showInterval = value;
+                    });
+                  }),
+              Text('Interval'),
             ],
           ),
           SizedBox(
@@ -140,13 +165,13 @@ class _BoardState extends State<Board> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         //_getFretSquare((widget.isLefty ? (24 - fret) : fret)),
-        ...columnNotes.map((String note) => _getNoteSquare(note)).toList(),
+        ...columnNotes.map((String note) => _getNoteSquare(note, noteIntervalMap[note])).toList(),
         _getFretSquare((isLefty ? (24 - fret) : fret)),
       ],
     );
   }
 
-  Widget _getNoteSquare(String note) {
+  Widget _getNoteSquare(String note, String interval) {
     bool highlight = highlightedNotes.indexOf(note) != -1;
 
     return Container(
@@ -162,7 +187,7 @@ class _BoardState extends State<Board> {
         border: Border.all(color: Colors.black, width: 1),
       ),
       child: Text(
-        note,
+        showInterval && highlight ? interval : note,
         style: TextStyle(color: highlight ? Colors.white : Colors.black),
       ),
     );

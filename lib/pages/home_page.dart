@@ -32,12 +32,31 @@ class _HomePageState extends State<HomePage> {
   }
 
   void createScaleOptions() {
-    scaleOptions = notes.scales.keys
+    scaleOptions.clear();
+    for (int i = 0; i < notes.scales.keys.length; i++) {
+      if (i > 0 && i % 7 == 0) {
+        scaleOptions.add(
+          DropdownMenuItem(
+            child: Container(height: 5,child: Divider(height: 1,thickness: 1,)),
+            value: null,
+          ),
+        );
+      }
+
+      scaleOptions.add(
+        DropdownMenuItem(
+          child: Text(notes.scales.keys.elementAt(i)),
+          value: notes.scales.keys.elementAt(i),
+        ),
+      );
+    }
+
+    /*scaleOptions = notes.scales.keys
         .map((String scale) => DropdownMenuItem(
               child: Text(scale),
               value: scale,
             ))
-        .toList();
+        .toList();*/
     selectedScale = notes.scales.entries.first;
   }
 
@@ -97,6 +116,9 @@ class _HomePageState extends State<HomePage> {
                   DropdownButton(
                     items: scaleOptions,
                     onChanged: (dynamic value) {
+                      if(value == null){
+                        return;
+                      }
                       setState(() {
                         selectedScale = notes.scales.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == value);
                       });

@@ -43,7 +43,7 @@ class _ChordProgressionState extends State<ChordProgression> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            notes.getScaleFormula(widget.selectedScale.value),
+            notes.getScaleFormula(widget.selectedScale.value, false),
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
           ),
           SizedBox(height: 10,),
@@ -93,7 +93,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                                     chords[index][innerIndex].keys.first,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontWeight: innerIndex == 0 || chords[index][innerIndex].keys.first == selectedChord ? FontWeight.bold : FontWeight.normal,
+                                      fontWeight: chords[index][innerIndex].keys.first == selectedChord ? FontWeight.bold : FontWeight.normal,
                                       color: chords[index][innerIndex].keys.first == selectedChord ? Colors.blue.shade300 : Colors.white,
                                     ),
                                   ),
