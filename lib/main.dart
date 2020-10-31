@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Guitar Guide',
+      title: 'The Guitar Guide',
       theme: ThemeData.dark(),
       home: HomePage(),
     );
