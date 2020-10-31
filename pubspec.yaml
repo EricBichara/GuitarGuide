@@ -24,6 +24,8 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_platform_widgets: ^0.70.2
+  provider: ^4.3.2+2
+  get_it: ^5.0.1
 
 
 

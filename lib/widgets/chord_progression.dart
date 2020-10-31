@@ -1,6 +1,9 @@
 
 import 'package:flutter/material.dart';
+import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
+import 'package:guitar_guide/core/notes_provider.dart';
+import 'package:guitar_guide/core/sl_factory.dart';
 
 class ChordProgression extends StatefulWidget {
   final String scaleKey;
@@ -14,7 +17,8 @@ class ChordProgression extends StatefulWidget {
 }
 
 class _ChordProgressionState extends State<ChordProgression> {
-  Notes notes = Notes();
+  Notes notes;
+  NotesProvider notesProvider;
   List<List<Map<String, List<int>>>> chords = [];
   List<String> keysForScale = [];
   List<String> scaleTone = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
@@ -35,6 +39,13 @@ class _ChordProgressionState extends State<ChordProgression> {
   }
 
   @override
+  void initState() {
+    notesProvider = sl<NotesProvider>();
+    notes = notesProvider.notes;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
@@ -42,8 +53,8 @@ class _ChordProgressionState extends State<ChordProgression> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            notes.getScaleFormula(widget.selectedScale.value, false),
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            '${widget.scaleKey} ${widget.selectedScale.key}: ${notes.getScaleFormula(widget.selectedScale.value, false)}',
+            style: MyStyles.header,
           ),
           SizedBox(height: 10,),
           Container(

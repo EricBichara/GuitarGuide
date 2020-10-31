@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
+import 'package:guitar_guide/core/notes_provider.dart';
+import 'package:guitar_guide/core/sl_factory.dart';
 
 class Board extends StatefulWidget {
   final String musicKey;
@@ -33,7 +36,8 @@ class _BoardState extends State<Board> {
   Color red = Color.fromRGBO(214, 40, 40, 1);
   Color orange = Color.fromRGBO(247, 127, 0, 1);
 
-  Notes notes = Notes();
+  Notes notes;
+  NotesProvider notesProvider;
 
   List<String> getNotesForString(String stringKey, List<String> noteList) {
     int currentIndex = noteList.indexOf(stringKey);
@@ -57,6 +61,8 @@ class _BoardState extends State<Board> {
 
   @override
   void initState() {
+    notesProvider = sl<NotesProvider>();
+    notes = notesProvider.notes;
     setup();
     super.initState();
   }
@@ -109,9 +115,16 @@ class _BoardState extends State<Board> {
                 width: 500,
                 child: Text(
                   '${widget.musicKey} ${widget.chord} : $chordFormula',
-                  style: TextStyle(fontSize: 30),
+                  style: MyStyles.header,
                 ),
               ),
+            ],
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
               Text('Right-handed'),
               PlatformSwitch(
                   value: isLefty,
@@ -137,10 +150,10 @@ class _BoardState extends State<Board> {
             ],
           ),
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Container(
-            height: 320,
+            height: 290,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {

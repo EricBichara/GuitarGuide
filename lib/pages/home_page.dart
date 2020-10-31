@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:guitar_guide/core/notes.dart';
+import 'package:guitar_guide/core/notes_provider.dart';
+import 'package:guitar_guide/core/sl_factory.dart';
+import 'package:provider/provider.dart';
 import 'package:guitar_guide/widgets/board.dart';
 import 'package:guitar_guide/widgets/chord_progression.dart';
 
@@ -17,13 +20,18 @@ class _HomePageState extends State<HomePage> {
   String chordKey;
   String selectedChord;
 
-  Notes notes = Notes();
+  NotesProvider notesProvider;
+  Notes notes;
 
   @override
   void initState() {
+    //createChordOptions();
+
+    notesProvider = sl<NotesProvider>();
+    notes = notesProvider.notes;
+
     createScaleOptions();
     createKeyOptions();
-    //createChordOptions();
 
     Future.delayed(Duration(seconds: 2), () {
       setState(() {});
@@ -37,7 +45,12 @@ class _HomePageState extends State<HomePage> {
       if (i > 0 && i % 7 == 0) {
         scaleOptions.add(
           DropdownMenuItem(
-            child: Container(height: 5,child: Divider(height: 1,thickness: 1,)),
+            child: Container(
+                height: 5,
+                child: Divider(
+                  height: 1,
+                  thickness: 1,
+                )),
             value: null,
           ),
         );
@@ -91,51 +104,55 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Guitar Guide'),
+        title: Text('GG'),
+        centerTitle: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Row(
+              children: [
+                DropdownButton(
+                  items: keyOptions,
+                  onChanged: (dynamic value) {
+                    setState(() {
+                      selectedKey = value;
+                    });
+                  },
+                  value: selectedKey,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                DropdownButton(
+                  items: scaleOptions,
+                  onChanged: (dynamic value) {
+                    if (value == null) {
+                      return;
+                    }
+                    setState(() {
+                      selectedScale = notes.scales.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == value);
+                    });
+                  },
+                  value: selectedScale.key,
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  DropdownButton(
-                    items: keyOptions,
-                    onChanged: (dynamic value) {
-                      setState(() {
-                        selectedKey = value;
-                      });
-                    },
-                    value: selectedKey,
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  DropdownButton(
-                    items: scaleOptions,
-                    onChanged: (dynamic value) {
-                      if(value == null){
-                        return;
-                      }
-                      setState(() {
-                        selectedScale = notes.scales.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == value);
-                      });
-                    },
-                    value: selectedScale.key,
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
               ChordProgression(
                 scaleKey: selectedKey,
                 selectedScale: selectedScale,
                 selectChordCallback: selectChord,
               ),
-              Divider(),
+              Divider(
+                color: Colors.grey.shade800,
+                thickness: 1,
+              ),
               if (selectedChord != null)
                 Board(
                   chord: selectedChord,
