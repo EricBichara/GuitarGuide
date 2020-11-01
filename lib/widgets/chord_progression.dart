@@ -54,7 +54,7 @@ class _ChordProgressionState extends State<ChordProgression> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            '${widget.scaleKey} ${widget.selectedScale.key}: ${notes.getScaleFormula(widget.selectedScale.value, false)}',
+            '${widget.scaleKey} ${widget.selectedScale.key}: ${notes.getScaleFormula(widget.selectedScale.value)}',
             style: MyStyles.header,
           ),
           SizedBox(

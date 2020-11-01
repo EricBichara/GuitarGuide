@@ -102,7 +102,8 @@ class Notes {
     return convertedNotes;
   }
 
-  String getScaleFormula(List<int> notes, bool isChord) {
+  String getChordFormula(String chord) {
+    List<int> notes = chords.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == chord).value;
     List<String> formula = [];
 
     for (int i = 0; i < notes.length; i++) {
@@ -125,11 +126,7 @@ class Notes {
           formula.add("b3");
           break;
         case 5:
-          if(notes[i-1] == 4 && isChord == false){
-            formula.add("b4");
-          }else{
-            formula.add("3");
-          }
+          formula.add("3");
           break;
         case 6:
           if (notes[i - 1] < note) {
@@ -139,21 +136,13 @@ class Notes {
           }
           break;
         case 7:
-          if(notes[i-1] != 6 && formula.last != 'b4' && isChord == false){
-            formula.add("#4");
-          }else {
-            formula.add("b5");
-          }
+          formula.add("b5");
           break;
         case 8:
           formula.add("5");
           break;
         case 9:
-          if(notes[i+1] == 10 && isChord == false){
-            formula.add("#5");
-          }else{
-            formula.add("b6");
-          }
+          formula.add("b6");
           break;
         case 10:
           if (notes[i - 1] < note) {
@@ -173,9 +162,77 @@ class Notes {
     return formula.join(' - ');
   }
 
-  String getChordFormula(String chord) {
-    List<int> chordNotes = chords.entries.firstWhere((MapEntry<String, List<int>> element) => element.key == chord).value;
-    return getScaleFormula(chordNotes, true);
+  String getScaleFormula(List<int> notes) {
+    List<String> formula = [];
+
+    for (int i = 0; i < notes.length; i++) {
+      int note = notes[i];
+      switch (note) {
+        case 1:
+          formula.add("R");
+          break;
+        case 2:
+          formula.add("b2");
+          break;
+        case 3:
+          formula.add("2");
+          break;
+        case 4:
+          if (formula.last == 'R') {
+            formula.add('#2');
+          } else {
+            formula.add("b3");
+          }
+          break;
+        case 5:
+          if (formula.last == '#2') {
+            formula.add('3');
+          } else if (notes[i - 1] == 4) {
+            formula.add("b4");
+          } else {
+            formula.add("3");
+          }
+          break;
+        case 6:
+          if (notes[i - 1] < note) {
+            formula.add("4");
+          } else {
+            formula.add("11");
+          }
+          break;
+        case 7:
+          if (notes[i - 1] != 6 && formula.last != 'b4') {
+            formula.add("#4");
+          } else {
+            formula.add("b5");
+          }
+          break;
+        case 8:
+          formula.add("5");
+          break;
+        case 9:
+          if (formula.last == '4' || formula.last == '#4') {
+            formula.add("#5");
+          } else {
+            formula.add("b6");
+          }
+          break;
+        case 10:
+          if (formula.last == '6' || formula.last == 'b6') {
+            formula.add("bb7");
+          }else{
+            formula.add('6');
+          }
+          break;
+        case 11:
+          formula.add("b7");
+          break;
+        case 12:
+          formula.add("7");
+          break;
+      }
+    }
+    return formula.join(' - ');
   }
 
   List<int> getChordIntervals(List<int> chordNotes) {
