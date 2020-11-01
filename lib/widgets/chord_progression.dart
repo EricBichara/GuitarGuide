@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
@@ -23,6 +22,7 @@ class _ChordProgressionState extends State<ChordProgression> {
   List<String> keysForScale = [];
   List<String> scaleTone = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
   String selectedChord;
+  String selectedChordKey;
 
   @override
   void didUpdateWidget(covariant ChordProgression oldWidget) {
@@ -35,6 +35,7 @@ class _ChordProgressionState extends State<ChordProgression> {
 
   void selectChord(String chord, String key) {
     selectedChord = chord;
+    selectedChordKey = key;
     widget.selectChordCallback(chord, key);
   }
 
@@ -56,7 +57,9 @@ class _ChordProgressionState extends State<ChordProgression> {
             '${widget.scaleKey} ${widget.selectedScale.key}: ${notes.getScaleFormula(widget.selectedScale.value, false)}',
             style: MyStyles.header,
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Container(
             height: 270,
             width: double.infinity,
@@ -103,8 +106,12 @@ class _ChordProgressionState extends State<ChordProgression> {
                                     chords[index][innerIndex].keys.first,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
-                                      fontWeight: chords[index][innerIndex].keys.first == selectedChord ? FontWeight.bold : FontWeight.normal,
-                                      color: chords[index][innerIndex].keys.first == selectedChord ? Colors.blue.shade300 : Colors.white,
+                                      fontWeight: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                          ? FontWeight.bold
+                                          : FontWeight.normal,
+                                      color: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                          ? Colors.blue.shade300
+                                          : Colors.white,
                                     ),
                                   ),
                                 );

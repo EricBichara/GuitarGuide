@@ -29,7 +29,7 @@ class _BoardState extends State<Board> {
 
   Map<String, String> noteIntervalMap = Map<String, String>();
 
-  bool isLefty = true;
+  bool isLefty = false;
   bool showInterval = false;
 
   Color darkBlue = Color.fromRGBO(0, 48, 73, 1);
@@ -91,9 +91,9 @@ class _BoardState extends State<Board> {
     createNoteIntervalMap();
   }
 
-  void createNoteIntervalMap(){
+  void createNoteIntervalMap() {
     List<String> cf = chordFormula.split(' - ');
-    for(int i = 0; i<cf.length; i++){
+    for (int i = 0; i < cf.length; i++) {
       noteIntervalMap[highlightedNotes[i]] = cf[i];
     }
   }
@@ -106,47 +106,59 @@ class _BoardState extends State<Board> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                width: 500,
-                child: Text(
-                  '${widget.musicKey} ${widget.chord} : $chordFormula',
-                  style: MyStyles.header,
-                ),
-              ),
-            ],
+          Text(
+            '${widget.musicKey} ${widget.chord} : $chordFormula',
+            style: MyStyles.header,
           ),
           SizedBox(
             height: 10,
           ),
           Row(
             children: [
-              Text('Right-handed'),
-              PlatformSwitch(
-                  value: isLefty,
-                  onChanged: (bool value) {
-                    setState(() {
-                      isLefty = value;
-                      setup();
-                    });
-                  }),
-              Text('Left-handed'),
-              SizedBox(
-                width: 90,
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.deepPurpleAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Text('Right-handed'),
+                    PlatformSwitch(
+                        value: isLefty,
+                        onChanged: (bool value) {
+                          setState(() {
+                            isLefty = value;
+                            setup();
+                          });
+                        }),
+                    Text('Left-handed'),
+                  ],
+                ),
               ),
-              Text('Note'),
-              PlatformSwitch(
-                  value: showInterval,
-                  onChanged: (bool value) {
-                    setState(() {
-                      showInterval = value;
-                    });
-                  }),
-              Text('Interval'),
+              SizedBox(
+                width: 10,
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                decoration: BoxDecoration(
+                  color: Colors.indigoAccent,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Row(
+                  children: [
+                    Text('Note'),
+                    PlatformSwitch(
+                        value: showInterval,
+                        onChanged: (bool value) {
+                          setState(() {
+                            showInterval = value;
+                          });
+                        }),
+                    Text('Interval'),
+                  ],
+                ),
+              ),
             ],
           ),
           SizedBox(
