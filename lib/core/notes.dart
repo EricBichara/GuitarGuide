@@ -135,7 +135,7 @@ class Notes {
           formula.add("3");
           break;
         case 6:
-          if (notes[i - 1] < note && notes[i-2] < note) {
+          if (notes[i - 1] < note && formula.length < 3) {
             formula.add("4");
           } else {
             formula.add("11");
@@ -151,7 +151,7 @@ class Notes {
           formula.add("b6");
           break;
         case 10:
-          if (notes[i - 1] < note && notes[i-2] < note && notes[i-3] < note) {
+          if (notes[i - 1] < note && formula.length < 4) {
             formula.add("6");
           } else {
             formula.add("13");
