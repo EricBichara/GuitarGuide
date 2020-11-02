@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
 import 'package:guitar_guide/core/notes_provider.dart';
+import 'package:guitar_guide/core/settings_provider.dart';
 import 'package:guitar_guide/core/sl_factory.dart';
+import 'package:guitar_guide/widgets/settings_dialog.dart';
 
 class Board extends StatefulWidget {
   final String musicKey;
@@ -20,7 +23,6 @@ class Board extends StatefulWidget {
 class _BoardState extends State<Board> {
   List<String> _notesOrg = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
   List<String> _notes = [];
-  List<String> _stringNotes = ['E', 'B', 'G', 'D', 'A', 'E'];
 
   List<int> highlightedFrets = [0, 3, 5, 7, 9, 12, 15, 17, 19, 21, 24];
   List<String> highlightedNotes = [];
@@ -29,15 +31,14 @@ class _BoardState extends State<Board> {
 
   Map<String, String> noteIntervalMap = Map<String, String>();
 
-  bool isLefty = false;
-  bool showInterval = false;
-
   Color darkBlue = Color.fromRGBO(0, 48, 73, 1);
   Color red = Color.fromRGBO(214, 40, 40, 1);
   Color orange = Color.fromRGBO(247, 127, 0, 1);
 
   Notes notes;
   NotesProvider notesProvider;
+
+  SettingsProvider settingsProvider;
 
   List<String> getNotesForString(String stringKey, List<String> noteList) {
     int currentIndex = noteList.indexOf(stringKey);
@@ -63,14 +64,21 @@ class _BoardState extends State<Board> {
   void initState() {
     notesProvider = sl<NotesProvider>();
     notes = notesProvider.notes;
+
+    settingsProvider = sl<SettingsProvider>();
+
+    settingsProvider.addListener(() {
+      setup();
+      setState(() {});
+    });
     setup();
     super.initState();
   }
 
   void setup() {
-    _notes = isLefty ? _notesOrg : _notesOrg.reversed.toList();
+    _notes = settingsProvider.isLefty ? _notesOrg : _notesOrg.reversed.toList();
     stringsNotes.clear();
-    _stringNotes.forEach((String note) {
+    settingsProvider.stringNotes.forEach((String note) {
       stringsNotes.add(getNotesForString(note, _notes).reversed.toList());
     });
 
@@ -106,58 +114,37 @@ class _BoardState extends State<Board> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            '${widget.musicKey} ${widget.chord} : $chordFormula',
-            style: MyStyles.header,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Row(
+          Wrap(
             children: [
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurpleAccent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  children: [
-                    Text('Right-handed'),
-                    PlatformSwitch(
-                        value: isLefty,
-                        onChanged: (bool value) {
-                          setState(() {
-                            isLefty = value;
-                            setup();
-                          });
-                        }),
-                    Text('Left-handed'),
-                  ],
-                ),
+              Text(
+                '${widget.musicKey} ${widget.chord} : $chordFormula',
+                style: MyStyles.header,
               ),
               SizedBox(
-                width: 10,
+                width: 30,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                decoration: BoxDecoration(
-                  color: Colors.indigoAccent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
+              FlatButton(
+                color: Colors.deepPurpleAccent,
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text('Note'),
-                    PlatformSwitch(
-                        value: showInterval,
-                        onChanged: (bool value) {
-                          setState(() {
-                            showInterval = value;
-                          });
-                        }),
-                    Text('Interval'),
+                    Icon(Icons.settings),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text('Settings')
                   ],
                 ),
+                onPressed: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text('Settings'),
+                        elevation: 3,
+                        content: SettingsDialog(),
+                      ));
+                },
               ),
             ],
           ),
@@ -189,9 +176,8 @@ class _BoardState extends State<Board> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        //_getFretSquare((widget.isLefty ? (24 - fret) : fret)),
         ...columnNotes.map((String note) => _getNoteSquare(note, noteIntervalMap[note])).toList(),
-        _getFretSquare((isLefty ? (24 - fret) : fret)),
+        _getFretSquare((settingsProvider.isLefty ? (24 - fret) : fret)),
       ],
     );
   }
@@ -212,7 +198,7 @@ class _BoardState extends State<Board> {
         border: Border.all(color: Colors.black, width: 1),
       ),
       child: Text(
-        showInterval && highlight ? interval : note,
+        settingsProvider.showInterval && highlight ? interval : note,
         style: TextStyle(color: highlight ? Colors.white : Colors.black),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:guitar_guide/core/notes_provider.dart';
+import 'package:guitar_guide/core/settings_provider.dart';
 import 'package:guitar_guide/core/sl_factory.dart' as di;
 import 'package:guitar_guide/pages/home_page.dart';
 import 'package:provider/provider.dart';
@@ -14,8 +15,15 @@ void main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Provider<NotesProvider>(
-      create: (BuildContext context) => di.sl<NotesProvider>(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<NotesProvider>(
+          create: (BuildContext context) => di.sl<NotesProvider>(),
+        ),
+        ChangeNotifierProvider<SettingsProvider>(
+          create: (BuildContext context) => di.sl<SettingsProvider>(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'The Guitar Guide',
