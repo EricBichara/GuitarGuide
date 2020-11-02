@@ -46,7 +46,9 @@ class Notes {
       'Major 7': convertScale([Note.root, Note.M3, Note.p5, Note.M7]),
       'Major 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.M7]),
       'Major 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.M7]),
-      'Major 9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
+      'Major 9': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2]),
+      'Major add9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
+      'Major 13': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
       'Sus2': convertScale([Note.root, Note.M2, Note.p5]),
       'Sus4': convertScale([Note.root, Note.p4, Note.p5]),
       'Major 6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
@@ -55,6 +57,7 @@ class Notes {
       'Minor 9': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2]),
       'Minor add9': convertScale([Note.root, Note.b3, Note.p5, Note.M2]),
       'Minor 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
+      'Minor 13': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
       'Dominant 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
       'Dominant 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
     };
@@ -132,7 +135,7 @@ class Notes {
           formula.add("3");
           break;
         case 6:
-          if (notes[i - 1] < note) {
+          if (notes[i - 1] < note && notes[i-2] < note) {
             formula.add("4");
           } else {
             formula.add("11");
@@ -148,7 +151,7 @@ class Notes {
           formula.add("b6");
           break;
         case 10:
-          if (notes[i - 1] < note) {
+          if (notes[i - 1] < note && notes[i-2] < note && notes[i-3] < note) {
             formula.add("6");
           } else {
             formula.add("13");
