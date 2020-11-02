@@ -1,3 +1,5 @@
+import 'dart:html';
+
 enum Note { root, b2, M2, b3, M3, p4, b5, p5, b6, M6, b7, M7 }
 
 class Notes {
@@ -221,7 +223,7 @@ class Notes {
         case 10:
           if (formula.last == '6' || formula.last == 'b6') {
             formula.add("bb7");
-          }else{
+          } else {
             formula.add('6');
           }
           break;
@@ -285,9 +287,106 @@ class Notes {
     List<String> keysForScale = [];
 
     scaleNotes.forEach((int note) {
-      keysForScale.add(extendedKeys[firstIndex + (note - 1)]);
+      if (keysForScale.isEmpty) {
+        keysForScale.add(extendedKeys[firstIndex + (note - 1)]);
+      } else {
+        String eh = getKeyEnharmonic(keysForScale.last, extendedKeys[firstIndex + (note - 1)]);
+        keysForScale.add(eh);
+      }
     });
 
     return keysForScale;
+  }
+
+  String getKeyEnharmonic(String prev, String current) {
+    switch (current) {
+      case 'A':
+        if (prev == 'F##') {
+          return 'G##';
+        }
+        break;
+      case 'A#':
+        if (prev == 'A' || prev == 'Ab') {
+          return 'Bb';
+        }
+        break;
+      case 'C':
+        if (prev == 'A#') {
+          return 'B#';
+        }
+        break;
+      case 'C#':
+        if (prev == 'C' || prev == 'Cb') {
+          return 'Db';
+        }
+        break;
+      case 'D':
+        if (prev == 'B#') {
+          return 'C##';
+        }
+        break;
+      case 'D#':
+        if (prev == 'D' || prev == 'Db') {
+          return 'Eb';
+        }
+        break;
+      case 'E':
+        if (prev == 'Eb') {
+          return 'Fb';
+        }
+        break;
+      case 'F':
+        if (prev == 'D#') {
+          return 'E#';
+        }
+        break;
+      case 'F#':
+        if (prev == 'F' || prev == 'Fb') {
+          return 'Gb';
+        }
+        break;
+      case 'G':
+        if (prev == 'E#') {
+          return 'F##';
+        }
+        break;
+      case 'G#':
+        if (prev == 'G' || prev == 'Gb') {
+          return 'Ab';
+        }
+        break;
+    }
+
+    return current;
+  }
+
+  String convertBackEnharmonic(String key) {
+    if (key == 'G##') {
+      return 'A';
+    } else if (key == 'Bb') {
+      return 'A#';
+    } else if (key == 'A##' || key == 'Cb') {
+      return 'B';
+    } else if (key == 'B#') {
+      return 'C';
+    } else if (key == 'Db') {
+      return 'C#';
+    } else if (key == 'C##') {
+      return 'D';
+    } else if (key == 'Eb') {
+      return 'D#';
+    } else if (key == 'D##' || key == 'Fb') {
+      return 'E';
+    } else if (key == 'E#') {
+      return 'F';
+    } else if (key == 'E##' || key == 'Gb') {
+      return 'F#';
+    } else if (key == 'F##') {
+      return 'G';
+    } else if (key == 'Ab') {
+      return 'G#';
+    } else {
+      return key;
+    }
   }
 }

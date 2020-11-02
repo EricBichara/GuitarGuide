@@ -35,8 +35,8 @@ class _ChordProgressionState extends State<ChordProgression> {
 
   void selectChord(String chord, String key) {
     selectedChord = chord;
-    selectedChordKey = key;
-    widget.selectChordCallback(chord, key);
+    selectedChordKey = notes.convertBackEnharmonic(key);
+    widget.selectChordCallback(selectedChord, selectedChordKey);
   }
 
   @override
