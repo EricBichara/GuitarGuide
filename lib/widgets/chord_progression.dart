@@ -80,7 +80,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          scaleTone[index],
+                          chords[index][0].keys.first == 'Major' ? scaleTone[index].toUpperCase() : scaleTone[index].toLowerCase(),
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         SizedBox(
