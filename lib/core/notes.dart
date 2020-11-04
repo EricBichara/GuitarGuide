@@ -40,8 +40,10 @@ class Notes {
       'Major': convertScale([Note.root, Note.M3, Note.p5]),
       'Minor': convertScale([Note.root, Note.b3, Note.p5]),
       'Dominant': convertScale([Note.root, Note.M3, Note.p5, Note.b7]),
-      'Diminished': convertScale([Note.root, Note.b5, Note.b7]),
+      'Diminished': convertScale([Note.root, Note.b3, Note.b5]),
+      'Diminished 7th': convertScale([Note.root, Note.b3, Note.b5, Note.M6]),
       'Minor 7': convertScale([Note.root, Note.b3, Note.p5, Note.b7]),
+      'Augmented': convertScale([Note.root, Note.M3, Note.b5]),
       'Minor 7b5': convertScale([Note.root, Note.b3, Note.b5, Note.b7]),
       'Major 7': convertScale([Note.root, Note.M3, Note.p5, Note.M7]),
       'Major 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.M7]),
@@ -58,8 +60,9 @@ class Notes {
       'Minor add9': convertScale([Note.root, Note.b3, Note.p5, Note.M2]),
       'Minor 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
       'Minor 13': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
-      'Dominant 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
-      'Dominant 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
+      'Dom 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.b7]),
+      'Dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
+      'Dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
     };
   }
 
@@ -148,7 +151,11 @@ class Notes {
           formula.add("5");
           break;
         case 9:
-          formula.add("b6");
+          if(formula.last != '5' && formula.last != 'b5'){
+           formula.add('#5');
+          }else{
+            formula.add("b6");
+          }
           break;
         case 10:
           if (notes[i - 1] < note && formula.length < 4) {
