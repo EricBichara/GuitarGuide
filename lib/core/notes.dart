@@ -1,3 +1,5 @@
+import 'dart:html';
+
 enum Note { root, b2, M2, b3, M3, p4, b5, p5, b6, M6, b7, M7 }
 
 class Notes {
@@ -38,23 +40,30 @@ class Notes {
       'Major': convertScale([Note.root, Note.M3, Note.p5]),
       'Minor': convertScale([Note.root, Note.b3, Note.p5]),
       'Dominant': convertScale([Note.root, Note.M3, Note.p5, Note.b7]),
-      'Diminished': convertScale([Note.root, Note.b5, Note.b7]),
+      'Diminished': convertScale([Note.root, Note.b3, Note.b5]),
+      'Diminished 7th': convertScale([Note.root, Note.b3, Note.b5, Note.M6]),
       'Minor 7': convertScale([Note.root, Note.b3, Note.p5, Note.b7]),
+      'Augmented': convertScale([Note.root, Note.M3, Note.b5]),
       'Minor 7b5': convertScale([Note.root, Note.b3, Note.b5, Note.b7]),
       'Major 7': convertScale([Note.root, Note.M3, Note.p5, Note.M7]),
       'Major 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.M7]),
       'Major 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.M7]),
-      'Major 9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
+      'Major 9': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2]),
+      'Major add9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
+      'Major 13': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
       'Sus2': convertScale([Note.root, Note.M2, Note.p5]),
       'Sus4': convertScale([Note.root, Note.p4, Note.p5]),
       'Major 6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
+      'Major 6add9': convertScale([Note.root, Note.M3, Note.p5, Note.M6, Note.M2]),
       'Major 11': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.p4]),
       'Major b5': convertScale([Note.root, Note.M3, Note.b5]),
       'Minor 9': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2]),
       'Minor add9': convertScale([Note.root, Note.b3, Note.p5, Note.M2]),
       'Minor 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
-      'Dominant 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
-      'Dominant 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
+      'Minor 13': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
+      'Dom 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.b7]),
+      'Dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
+      'Dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
     };
   }
 
@@ -130,7 +139,7 @@ class Notes {
           formula.add("3");
           break;
         case 6:
-          if (notes[i - 1] < note) {
+          if (notes[i - 1] < note && formula.length < 3) {
             formula.add("4");
           } else {
             formula.add("11");
@@ -143,10 +152,14 @@ class Notes {
           formula.add("5");
           break;
         case 9:
-          formula.add("b6");
+          if(formula.last != '5' && formula.last != 'b5'){
+           formula.add('#5');
+          }else{
+            formula.add("b6");
+          }
           break;
         case 10:
-          if (notes[i - 1] < note) {
+          if (notes[i - 1] < note && formula.length < 4) {
             formula.add("6");
           } else {
             formula.add("13");
@@ -221,7 +234,7 @@ class Notes {
         case 10:
           if (formula.last == '6' || formula.last == 'b6') {
             formula.add("bb7");
-          }else{
+          } else {
             formula.add('6');
           }
           break;
@@ -285,9 +298,106 @@ class Notes {
     List<String> keysForScale = [];
 
     scaleNotes.forEach((int note) {
-      keysForScale.add(extendedKeys[firstIndex + (note - 1)]);
+      if (keysForScale.isEmpty) {
+        keysForScale.add(extendedKeys[firstIndex + (note - 1)]);
+      } else {
+        String eh = getKeyEnharmonic(keysForScale.last, extendedKeys[firstIndex + (note - 1)]);
+        keysForScale.add(eh);
+      }
     });
 
     return keysForScale;
+  }
+
+  String getKeyEnharmonic(String prev, String current) {
+    switch (current) {
+      case 'A':
+        if (prev == 'F##') {
+          return 'G##';
+        }
+        break;
+      case 'A#':
+        if (prev == 'A' || prev == 'Ab') {
+          return 'Bb';
+        }
+        break;
+      case 'C':
+        if (prev == 'A#') {
+          return 'B#';
+        }
+        break;
+      case 'C#':
+        if (prev == 'C' || prev == 'Cb') {
+          return 'Db';
+        }
+        break;
+      case 'D':
+        if (prev == 'B#') {
+          return 'C##';
+        }
+        break;
+      case 'D#':
+        if (prev == 'D' || prev == 'Db') {
+          return 'Eb';
+        }
+        break;
+      case 'E':
+        if (prev == 'Eb') {
+          return 'Fb';
+        }
+        break;
+      case 'F':
+        if (prev == 'D#') {
+          return 'E#';
+        }
+        break;
+      case 'F#':
+        if (prev == 'F' || prev == 'Fb') {
+          return 'Gb';
+        }
+        break;
+      case 'G':
+        if (prev == 'E#') {
+          return 'F##';
+        }
+        break;
+      case 'G#':
+        if (prev == 'G' || prev == 'Gb') {
+          return 'Ab';
+        }
+        break;
+    }
+
+    return current;
+  }
+
+  String convertBackEnharmonic(String key) {
+    if (key == 'G##') {
+      return 'A';
+    } else if (key == 'Bb') {
+      return 'A#';
+    } else if (key == 'A##' || key == 'Cb') {
+      return 'B';
+    } else if (key == 'B#') {
+      return 'C';
+    } else if (key == 'Db') {
+      return 'C#';
+    } else if (key == 'C##') {
+      return 'D';
+    } else if (key == 'Eb') {
+      return 'D#';
+    } else if (key == 'D##' || key == 'Fb') {
+      return 'E';
+    } else if (key == 'E#') {
+      return 'F';
+    } else if (key == 'E##' || key == 'Gb') {
+      return 'F#';
+    } else if (key == 'F##') {
+      return 'G';
+    } else if (key == 'Ab') {
+      return 'G#';
+    } else {
+      return key;
+    }
   }
 }

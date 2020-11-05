@@ -35,8 +35,8 @@ class _ChordProgressionState extends State<ChordProgression> {
 
   void selectChord(String chord, String key) {
     selectedChord = chord;
-    selectedChordKey = key;
-    widget.selectChordCallback(chord, key);
+    selectedChordKey = notes.convertBackEnharmonic(key);
+    widget.selectChordCallback(selectedChord, selectedChordKey);
   }
 
   @override
@@ -61,7 +61,7 @@ class _ChordProgressionState extends State<ChordProgression> {
             height: 10,
           ),
           Container(
-            height: 270,
+            height: 300,
             width: double.infinity,
             alignment: Alignment.center,
             child: ListView.builder(
@@ -80,7 +80,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          scaleTone[index],
+                          chords[index][0].keys.first == 'Major' ? scaleTone[index].toUpperCase() : scaleTone[index].toLowerCase(),
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         SizedBox(
