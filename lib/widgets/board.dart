@@ -138,12 +138,14 @@ class _BoardState extends State<Board> {
                 ),
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: Text('Settings'),
-                        elevation: 3,
-                        content: SettingsDialog(),
-                      ));
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      contentPadding: const EdgeInsets.all(15),
+                      title: Text('Settings'),
+                      elevation: 3,
+                      content: SettingsDialog(),
+                    ),
+                  );
                 },
               ),
             ],
