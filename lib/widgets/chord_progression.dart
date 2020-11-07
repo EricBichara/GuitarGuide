@@ -61,7 +61,7 @@ class _ChordProgressionState extends State<ChordProgression> {
             height: 10,
           ),
           Container(
-            height: 300,
+            height: 310,
             width: double.infinity,
             alignment: Alignment.center,
             child: ListView.builder(
