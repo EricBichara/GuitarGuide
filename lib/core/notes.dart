@@ -12,7 +12,7 @@ class Notes {
     scales = {
       //Church Modes W-W-H-W-W-W-H
       'Ionian (Major)': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.M7]),
-      'Dorian': convertScale([Note.root, Note.b2, Note.b3, Note.p4, Note.p5, Note.b6, Note.b7]),
+      'Dorian': convertScale([Note.root, Note.M2, Note.b3, Note.p4, Note.p5, Note.M6, Note.b7]),
       'Phrygian': convertScale([Note.root, Note.b2, Note.b3, Note.p4, Note.p5, Note.b6, Note.b7]),
       'Lydian': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.M7]),
       'Mixolydian': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.b7]),
