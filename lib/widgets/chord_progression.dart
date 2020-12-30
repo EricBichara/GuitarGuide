@@ -3,6 +3,7 @@ import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
 import 'package:guitar_guide/core/notes_provider.dart';
 import 'package:guitar_guide/core/sl_factory.dart';
+import 'package:charcode/charcode.dart';
 
 class ChordProgression extends StatefulWidget {
   final String scaleKey;
@@ -71,6 +72,26 @@ class _ChordProgressionState extends State<ChordProgression> {
                 BuildContext context,
                 int index,
               ) {
+
+                String name = '';
+                switch(chords[index][0].keys.first){
+                  case 'Major':
+                    name = scaleTone[index].toUpperCase();
+                    break;
+                  case 'Minor':
+                    name = scaleTone[index].toLowerCase();
+                    break;
+                  case 'Diminished':
+                    name = scaleTone[index].toLowerCase() + '\u1d52';
+                    break;
+                  case 'Augmented':
+                    name = scaleTone[index].toLowerCase() + '\u207A';
+                    break;
+                  default:
+                    name = scaleTone[index];
+                }
+
+
                 return Card(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -80,7 +101,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          chords[index][0].keys.first == 'Major' ? scaleTone[index].toUpperCase() : scaleTone[index].toLowerCase(),
+                          name,
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                         ),
                         SizedBox(
