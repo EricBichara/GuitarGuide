@@ -39,58 +39,55 @@ class Notes {
     chords = {
 
       //Triads
-      'Diminished': convertScale([Note.root, Note.b3, Note.b5]),
-      'Major': convertScale([Note.root, Note.M3, Note.p5]),
-      'Minor': convertScale([Note.root, Note.b3, Note.p5]),
-      'Augmented': convertScale([Note.root, Note.M3, Note.b6]),
+      'dim': convertScale([Note.root, Note.b3, Note.b5]),
+      'maj': convertScale([Note.root, Note.M3, Note.p5]),
+      'min': convertScale([Note.root, Note.b3, Note.p5]),
+      'aug': convertScale([Note.root, Note.M3, Note.b6]),
 
       //Major
-      'Major b5': convertScale([Note.root, Note.M3, Note.b5]),
-      'Major 6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
-      'Major 6add9': convertScale([Note.root, Note.M3, Note.p5, Note.M6, Note.M2]),
-      'Major 7': convertScale([Note.root, Note.M3, Note.p5, Note.M7]),
-      'Major 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.M7]),
-      'Major 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.M7]),
-      'Major 9': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2]),
-      'Major add9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
-      'Major 11': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.p4]),
-      'Major 13': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
+      'maj b5': convertScale([Note.root, Note.M3, Note.b5]),
+      'maj 6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
+      'maj 6add9': convertScale([Note.root, Note.M3, Note.p5, Note.M6, Note.M2]),
+      'maj 7': convertScale([Note.root, Note.M3, Note.p5, Note.M7]),
+      'maj 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.M7]),
+      'maj 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.M7]),
+      'maj 9': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2]),
+      'maj add9': convertScale([Note.root, Note.M3, Note.p5, Note.M2]),
+      'maj 11': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.p4]),
+      'maj 13': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
 
       //Minor
 
-      'Minor 6': convertScale([Note.root, Note.b3, Note.p5, Note.M6]),
-      'Minor 6add9': convertScale([Note.root, Note.b3, Note.p5, Note.M6, Note.M2]),
-      'Minor 7': convertScale([Note.root, Note.b3, Note.p5, Note.b7]),
-      'Minor 7b5': convertScale([Note.root, Note.b3, Note.b5, Note.b7]),
-      'Minor 9': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2]),
-      'Minor add9': convertScale([Note.root, Note.b3, Note.p5, Note.M2]),
-      'Minor 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
-      'Minor 13': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
+      'min 6': convertScale([Note.root, Note.b3, Note.p5, Note.M6]),
+      'min 6add9': convertScale([Note.root, Note.b3, Note.p5, Note.M6, Note.M2]),
+      'min 7': convertScale([Note.root, Note.b3, Note.p5, Note.b7]),
+      'min 7b5': convertScale([Note.root, Note.b3, Note.b5, Note.b7]),
+      'min 9': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2]),
+      'min add9': convertScale([Note.root, Note.b3, Note.p5, Note.M2]),
+      'min 11': convertScale([Note.root, Note.b3, Note.p5, Note.p4]),
+      'min 13': convertScale([Note.root, Note.b3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
 
       //Minor Major
-      'Min/Maj 7': convertScale([Note.root, Note.b3, Note.p5, Note.M7]),
-      'Min/Maj 9': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2]),
-      'Min/Maj 11': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2, Note.p4]),
-      'Min/Maj 13': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
+      'm/M 7': convertScale([Note.root, Note.b3, Note.p5, Note.M7]),
+      'm/M 9': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2]),
+      'm/M 11': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2, Note.p4]),
+      'm/M 13': convertScale([Note.root, Note.b3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
 
       //Dominant
-      'Dominant': convertScale([Note.root, Note.M3, Note.p5, Note.b7]),
-      'Dom 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.b7]),
-      'Dom 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.b7]),
-      'Dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
-      'Dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
+      'dom': convertScale([Note.root, Note.M3, Note.p5, Note.b7]),
+      'dom 7#5': convertScale([Note.root, Note.M3, Note.b6, Note.b7]),
+      'dom 7b5': convertScale([Note.root, Note.M3, Note.b5, Note.b7]),
+      'dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
+      'dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
 
       //Diminished
 
-      'Diminished 7th': convertScale([Note.root, Note.b3, Note.b5, Note.M6]),
+      'dim 7': convertScale([Note.root, Note.b3, Note.b5, Note.M6]),
 
       //Other
 
-      'Sus2': convertScale([Note.root, Note.M2, Note.p5]),
-      'Sus4': convertScale([Note.root, Note.p4, Note.p5]),
-
-
-
+      'sus2': convertScale([Note.root, Note.M2, Note.p5]),
+      'sus4': convertScale([Note.root, Note.p4, Note.p5]),
     };
   }
 

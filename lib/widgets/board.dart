@@ -178,14 +178,32 @@ class _BoardState extends State<Board> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ...columnNotes.map((String note) => _getNoteSquare(note, noteIntervalMap[note])).toList(),
+        ...columnNotes.map((String note) => _getNoteSquare(note, noteIntervalMap[note], fret)).toList(),
         _getFretSquare((settingsProvider.isLefty ? (24 - fret) : fret)),
       ],
     );
   }
 
-  Widget _getNoteSquare(String note, String interval) {
+  Widget _getNoteSquare(String note, String interval, int fret) {
     bool highlight = highlightedNotes.indexOf(note) != -1;
+
+    Border cellBorder;
+
+    if (settingsProvider.isLefty && fret == 24) {
+      cellBorder = Border(
+          top: BorderSide(color: Colors.black, width: 1),
+          right: BorderSide(color: Colors.black, width: 1),
+          bottom: BorderSide(color: Colors.black, width: 1),
+          left: BorderSide(color: Colors.black, width: 3));
+    } else if (!settingsProvider.isLefty && fret == 0) {
+      cellBorder = Border(
+          top: BorderSide(color: Colors.black, width: 1),
+          right: BorderSide(color: Colors.black, width: 2),
+          bottom: BorderSide(color: Colors.black, width: 1),
+          left: BorderSide(color: Colors.black, width: 1));
+    } else {
+      cellBorder = Border.all(color: Colors.black, width: 1);
+    }
 
     return Container(
       height: 40,
@@ -197,7 +215,7 @@ class _BoardState extends State<Board> {
                 ? red
                 : orange
             : Colors.grey.shade600,
-        border: Border.all(color: Colors.black, width: 1),
+        border: cellBorder,
       ),
       child: Text(
         settingsProvider.showInterval && highlight ? interval : note,

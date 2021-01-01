@@ -62,7 +62,7 @@ class _ChordProgressionState extends State<ChordProgression> {
             height: 10,
           ),
           Container(
-            height: 310,
+            height: 400,
             width: double.infinity,
             alignment: Alignment.center,
             child: ListView.builder(
@@ -75,16 +75,16 @@ class _ChordProgressionState extends State<ChordProgression> {
 
                 String name = '';
                 switch(chords[index][0].keys.first){
-                  case 'Major':
+                  case 'maj':
                     name = scaleTone[index].toUpperCase();
                     break;
-                  case 'Minor':
+                  case 'min':
                     name = scaleTone[index].toLowerCase();
                     break;
-                  case 'Diminished':
+                  case 'dim':
                     name = scaleTone[index].toLowerCase() + '\u1d52';
                     break;
-                  case 'Augmented':
+                  case 'aug':
                     name = scaleTone[index].toLowerCase() + '\u207A';
                     break;
                   default:
@@ -116,6 +116,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                         ),
                         Expanded(
                           child: Container(
+                            padding: const EdgeInsets.only(left: 10),
                             child: ListView.builder(
                               itemCount: chords[index].length,
                               itemBuilder: (context, innerIndex) {
@@ -123,23 +124,27 @@ class _ChordProgressionState extends State<ChordProgression> {
                                   onTap: () {
                                     selectChord(chords[index][innerIndex].keys.first, keysForScale[index]);
                                   },
-                                  child: Text(
-                                    chords[index][innerIndex].keys.first,
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
-                                          ? FontWeight.bold
-                                          : FontWeight.normal,
-                                      color: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
-                                          ? Colors.blue.shade300
-                                          : Colors.white,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 2),
+                                    child: Text(
+                                      chords[index][innerIndex].keys.first,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontWeight: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                            ? FontWeight.bold
+                                            : FontWeight.normal,
+                                        color: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                            ? Colors.blue.shade300
+                                            : Colors.white,
+                                        fontSize: 16,
+                                      ),
                                     ),
                                   ),
                                 );
                               },
                             ),
                             width: 100,
-                            height: 200,
+                            height: 250,
                           ),
                         ),
                       ],
