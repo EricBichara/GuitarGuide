@@ -152,7 +152,7 @@ class Notes {
           }
           break;
         case 4:
-          formula.add("m3");
+          formula.add("b3");
           break;
         case 5:
           formula.add("3");
@@ -185,7 +185,7 @@ class Notes {
           }
           break;
         case 11:
-          formula.add("m7");
+          formula.add("b7");
           break;
         case 12:
           formula.add("7");
