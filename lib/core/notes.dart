@@ -1,4 +1,4 @@
-enum Note { root, m2, M2, m3, M3, p4, b5, p5, m6, M6, b7, M7 }
+enum Note { root, m2, M2, m3, M3, p4, b5, p5, m6, M6, m7, M7 }
 
 class Notes {
   Map<String, List<int>> scales;
@@ -10,26 +10,26 @@ class Notes {
     scales = {
       //Church Modes W-W-H-W-W-W-H
       'Ionian (Major)': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.M7]),
-      'Dorian': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.M6, Note.b7]),
-      'Phrygian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.p5, Note.m6, Note.b7]),
+      'Dorian': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.M6, Note.m7]),
+      'Phrygian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.p5, Note.m6, Note.m7]),
       'Lydian': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.M7]),
-      'Mixolydian': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.b7]),
-      'Aeolian (Minor)': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.m6, Note.b7]),
-      'Locrian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.b5, Note.m6, Note.b7]),
+      'Mixolydian': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.m7]),
+      'Aeolian (Minor)': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.m6, Note.m7]),
+      'Locrian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.b5, Note.m6, Note.m7]),
       //Melodic Minor Modes W-H-W-W-W-W-H
       'Melodic Minor': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.M6, Note.M7]),
-      'Dorian m2': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.p5, Note.M6, Note.b7]),
+      'Dorian m2': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.p5, Note.M6, Note.m7]),
       'Lydian Augmented': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.m6, Note.M6, Note.M7]),
-      'Lydian Dominant': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.b7]),
-      'Mixolydian m6': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.m6, Note.b7]),
-      'Aeolian b5': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.b5, Note.m6, Note.b7]),
-      'Altered': convertScale([Note.root, Note.m2, Note.m3, Note.M3, Note.b5, Note.m6, Note.b7]),
+      'Lydian Dominant': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.m7]),
+      'Mixolydian m6': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.m6, Note.m7]),
+      'Aeolian b5': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.b5, Note.m6, Note.m7]),
+      'Altered': convertScale([Note.root, Note.m2, Note.m3, Note.M3, Note.b5, Note.m6, Note.m7]),
       //Harmonic Minor Modes W-H-W-W-H-WH-H
       'Harmonic Minor': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.m6, Note.M7]),
-      'Locrian #6': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.b5, Note.M6, Note.b7]),
+      'Locrian #6': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.b5, Note.M6, Note.m7]),
       'Ionian #5': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.m6, Note.M6, Note.M7]),
-      'Dorian #4': convertScale([Note.root, Note.M2, Note.m3, Note.b5, Note.p5, Note.M6, Note.b7]),
-      'Phrygian Dominant': convertScale([Note.root, Note.m2, Note.M3, Note.p4, Note.p5, Note.m6, Note.b7]),
+      'Dorian #4': convertScale([Note.root, Note.M2, Note.m3, Note.b5, Note.p5, Note.M6, Note.m7]),
+      'Phrygian Dominant': convertScale([Note.root, Note.m2, Note.M3, Note.p4, Note.p5, Note.m6, Note.m7]),
       'Lydian #2': convertScale([Note.root, Note.m3, Note.M3, Note.b5, Note.p5, Note.M6, Note.M7]),
       'Super Locrian': convertScale([Note.root, Note.m2, Note.m3, Note.M3, Note.b5, Note.m6, Note.M6]),
     };
@@ -57,12 +57,12 @@ class Notes {
       //Minor
       'min 6': convertScale([Note.root, Note.m3, Note.p5, Note.M6]),
       'min 6add9': convertScale([Note.root, Note.m3, Note.p5, Note.M6, Note.M2]),
-      'min 7': convertScale([Note.root, Note.m3, Note.p5, Note.b7]),
-      'min 7b5': convertScale([Note.root, Note.m3, Note.b5, Note.b7]),
-      'min 9': convertScale([Note.root, Note.m3, Note.p5, Note.b7, Note.M2]),
+      'min 7': convertScale([Note.root, Note.m3, Note.p5, Note.m7]),
+      'min 7b5': convertScale([Note.root, Note.m3, Note.b5, Note.m7]),
+      'min 9': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.M2]),
       'min add9': convertScale([Note.root, Note.m3, Note.p5, Note.M2]),
       'min 11': convertScale([Note.root, Note.m3, Note.p5, Note.p4]),
-      'min 13': convertScale([Note.root, Note.m3, Note.p5, Note.b7, Note.M2, Note.p4, Note.M6]),
+      'min 13': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.M2, Note.p4, Note.M6]),
 
       //Minor Major
       'm/M 7': convertScale([Note.root, Note.m3, Note.p5, Note.M7]),
@@ -71,11 +71,11 @@ class Notes {
       'm/M 13': convertScale([Note.root, Note.m3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
 
       //Dominant
-      'dom': convertScale([Note.root, Note.M3, Note.p5, Note.b7]),
-      'dom #5': convertScale([Note.root, Note.M3, Note.m6, Note.b7]),
-      'dom b5': convertScale([Note.root, Note.M3, Note.b5, Note.b7]),
-      'dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.M2]),
-      'dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.b7, Note.p4]),
+      'dom': convertScale([Note.root, Note.M3, Note.p5, Note.m7]),
+      'dom #5': convertScale([Note.root, Note.M3, Note.m6, Note.m7]),
+      'dom b5': convertScale([Note.root, Note.M3, Note.b5, Note.m7]),
+      'dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.m7, Note.M2]),
+      'dom 11': convertScale([Note.root, Note.M3, Note.p5, Note.m7, Note.p4]),
 
       //Diminished
       'dim 7': convertScale([Note.root, Note.m3, Note.b5, Note.M6]),
@@ -120,7 +120,7 @@ class Notes {
         case Note.M6:
           convertedNotes.add(10);
           break;
-        case Note.b7:
+        case Note.m7:
           convertedNotes.add(11);
           break;
         case Note.M7:
@@ -142,7 +142,7 @@ class Notes {
           formula.add("R");
           break;
         case 2:
-          formula.add("m2");
+          formula.add("b2");
           break;
         case 3:
           if (notes[i - 1] < note) {
@@ -174,18 +174,18 @@ class Notes {
           if(formula.last != '5' && formula.last != 'b5'){
            formula.add('#5');
           }else{
-            formula.add("m6");
+            formula.add("b6");
           }
           break;
         case 10:
           if (notes[i - 1] < note && formula.length < 4) {
-            formula.add("M6");
+            formula.add("6");
           } else {
             formula.add("13");
           }
           break;
         case 11:
-          formula.add("b7");
+          formula.add("m7");
           break;
         case 12:
           formula.add("7");
@@ -205,7 +205,7 @@ class Notes {
           formula.add("R");
           break;
         case 2:
-          formula.add("m2");
+          formula.add("b2");
           break;
         case 3:
           formula.add("2");
@@ -214,7 +214,7 @@ class Notes {
           if (formula.last == 'R') {
             formula.add('#2');
           } else {
-            formula.add("m3");
+            formula.add("b3");
           }
           break;
         case 5:
@@ -247,14 +247,14 @@ class Notes {
           if (formula.last == '4' || formula.last == '#4') {
             formula.add("#5");
           } else {
-            formula.add("m6");
+            formula.add("b6");
           }
           break;
         case 10:
-          if (formula.last == 'M6' || formula.last == 'm6') {
-            formula.add("bb7");
+          if (formula.last == '6' || formula.last == 'b6') {
+            formula.add("b7");
           } else {
-            formula.add('M6');
+            formula.add('6');
           }
           break;
         case 11:
