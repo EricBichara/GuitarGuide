@@ -143,7 +143,7 @@ class _ChordProgressionState extends State<ChordProgression> {
                                 );
                               },
                             ),
-                            width: 100,
+                            width: 130,
                             height: 250,
                           ),
                         ),

@@ -9,12 +9,12 @@ class Notes {
   Notes() {
     scales = {
       //Church Modes W-W-H-W-W-W-H
-      'Ionian (Major)': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.M7]),
+      'Ionian': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.M7]),
       'Dorian': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.M6, Note.m7]),
       'Phrygian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.p5, Note.m6, Note.m7]),
       'Lydian': convertScale([Note.root, Note.M2, Note.M3, Note.b5, Note.p5, Note.M6, Note.M7]),
       'Mixolydian': convertScale([Note.root, Note.M2, Note.M3, Note.p4, Note.p5, Note.M6, Note.m7]),
-      'Aeolian (Minor)': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.m6, Note.m7]),
+      'Aeolian': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.m6, Note.m7]),
       'Locrian': convertScale([Note.root, Note.m2, Note.m3, Note.p4, Note.b5, Note.m6, Note.m7]),
       //Melodic Minor Modes W-H-W-W-W-W-H
       'Melodic Minor': convertScale([Note.root, Note.M2, Note.m3, Note.p4, Note.p5, Note.M6, Note.M7]),
@@ -61,7 +61,8 @@ class Notes {
       'min 7b5': convertScale([Note.root, Note.m3, Note.b5, Note.m7]),
       'min 9': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.M2]),
       'min add9': convertScale([Note.root, Note.m3, Note.p5, Note.M2]),
-      'min 11': convertScale([Note.root, Note.m3, Note.p5, Note.p4]),
+      'min add9add11': convertScale([Note.root, Note.m3, Note.p5, Note.M2, Note.p4]),
+      'min add11': convertScale([Note.root, Note.m3, Note.p5, Note.p4]),
       'min 13': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.M2, Note.p4, Note.M6]),
 
       //Minor Major
@@ -71,7 +72,7 @@ class Notes {
       'm/M 13': convertScale([Note.root, Note.m3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
 
       //Dominant
-      'dom': convertScale([Note.root, Note.M3, Note.p5, Note.m7]),
+      'dom 7': convertScale([Note.root, Note.M3, Note.p5, Note.m7]),
       'dom #5': convertScale([Note.root, Note.M3, Note.m6, Note.m7]),
       'dom b5': convertScale([Note.root, Note.M3, Note.b5, Note.m7]),
       'dom 9': convertScale([Note.root, Note.M3, Note.p5, Note.m7, Note.M2]),
@@ -81,8 +82,12 @@ class Notes {
       'dim 7': convertScale([Note.root, Note.m3, Note.b5, Note.M6]),
 
       //Other
-      'sus2': convertScale([Note.root, Note.M2, Note.p5]),
-      'sus4': convertScale([Note.root, Note.p4, Note.p5]),
+      '6': convertScale([Note.root, Note.M3, Note.p5, Note.M6]),
+      '6 add9': convertScale([Note.root, Note.M3, Note.p5, Note.M6, Note.M2]),
+      'sus 2': convertScale([Note.root, Note.M2, Note.p5]),
+      'sus 4': convertScale([Note.root, Note.p4, Note.p5]),
+      'sus #4': convertScale([Note.root, Note.p4, Note.b5]),
+      'sus b5': convertScale([Note.root, Note.p4, Note.b5]),
     };
   }
 
