@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:guitar_guide/core/notes.dart';
 import 'package:guitar_guide/core/notes_provider.dart';
 import 'package:guitar_guide/core/sl_factory.dart';
-import 'package:provider/provider.dart';
 import 'package:guitar_guide/widgets/board.dart';
 import 'package:guitar_guide/widgets/chord_progression.dart';
 
