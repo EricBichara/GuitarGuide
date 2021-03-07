@@ -64,6 +64,7 @@ class Notes {
       'min add9add11': convertScale([Note.root, Note.m3, Note.p5, Note.M2, Note.p4]),
       'min add11': convertScale([Note.root, Note.m3, Note.p5, Note.p4]),
       'min 13': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.M2, Note.p4, Note.M6]),
+      'min 11b9': convertScale([Note.root, Note.m3, Note.p5, Note.m7, Note.m2, Note.p4]),
 
       //Minor Major
       'm/M 7': convertScale([Note.root, Note.m3, Note.p5, Note.M7]),
@@ -88,6 +89,8 @@ class Notes {
       'sus 4': convertScale([Note.root, Note.p4, Note.p5]),
       'sus #4': convertScale([Note.root, Note.p4, Note.b5]),
       'sus b5': convertScale([Note.root, Note.p4, Note.b5]),
+      '7 sus 4b9': convertScale([Note.root, Note.p4, Note.m7, Note.m2]),
+      '13(no3)':convertScale([Note.root, Note.p5, Note.m7, Note.M6]),
     };
   }
 
