@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class SettingsProvider with ChangeNotifier {
   List<String> _stringNotesSetting = ['E', 'B', 'G', 'D', 'A', 'E'];
-  bool _isLeftySetting = true;
+  bool _isLeftySetting = false;
   bool _showIntervalSetting = true;
 
   bool get isLefty {
