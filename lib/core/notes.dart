@@ -54,6 +54,7 @@ class Notes {
       'maj 11': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.p4]),
       'maj 13': convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.M2, Note.p4, Note.M6]),
       'maj 7(#11)':convertScale([Note.root, Note.M3, Note.p5, Note.M7, Note.b5]),
+      'maj 6(11)':convertScale([Note.root, Note.M3, Note.M6, Note.p4]),
 
       //Minor
       'min 6': convertScale([Note.root, Note.m3, Note.p5, Note.M6]),
