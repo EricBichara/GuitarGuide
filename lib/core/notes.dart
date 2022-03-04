@@ -1,8 +1,8 @@
 enum Note { root, m2, M2, m3, M3, p4, b5, p5, m6, M6, m7, M7 }
 
 class Notes {
-  Map<String, List<int>> scales;
-  Map<String, List<int>> chords;
+  late Map<String, List<int>> scales;
+  late Map<String, List<int>> chords;
 
   List<String> keys = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 

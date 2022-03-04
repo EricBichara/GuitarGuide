@@ -6,11 +6,11 @@ class NotesProvider with ChangeNotifier{
   NotesProvider(){
     notes = Notes();
   }
-  Notes notes;
+  late Notes notes;
 
-  MapEntry<String, List<int>> selectedScale;
-  String selectedKey;
+  MapEntry<String, List<int>>? selectedScale;
+  String? selectedKey;
 
-  String selectedChordKey;
-  String selectedChord;
+  String? selectedChordKey;
+  String? selectedChord;
 }

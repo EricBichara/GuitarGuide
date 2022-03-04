@@ -11,11 +11,11 @@ class SettingsDialog extends StatefulWidget {
 class _SettingsDialogState extends State<SettingsDialog> {
   bool isLefty = false;
   bool showInterval = false;
-  List<String> stringNotes;
+  late List<String> stringNotes;
   List<DropdownMenuItem> keyOptions = [];
-  List<String> _notesOrg = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
+  //List<String> _notesOrg = ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'];
 
-  SettingsProvider settingsProvider;
+  late SettingsProvider settingsProvider;
 
   @override
   void initState() {
@@ -181,8 +181,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              FlatButton(
-                color: Colors.red.shade700,
+              TextButton(
                 child: Text('Cancel'),
                 onPressed: () {
                   Navigator.pop(context);
@@ -191,8 +190,7 @@ class _SettingsDialogState extends State<SettingsDialog> {
               SizedBox(
                 width: 5,
               ),
-              FlatButton(
-                color: Colors.green.shade800,
+              TextButton(
                 onPressed: () {
                   saveSettings();
                 },

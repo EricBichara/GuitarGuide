@@ -14,13 +14,13 @@ class _HomePageState extends State<HomePage> {
   List<DropdownMenuItem> scaleOptions = [];
   List<DropdownMenuItem> keyOptions = [];
   List<DropdownMenuItem> chordOptions = [];
-  MapEntry<String, List<int>> selectedScale;
-  String selectedKey;
-  String chordKey;
-  String selectedChord;
+  late MapEntry<String, List<int>> selectedScale;
+  late String selectedKey;
+  String? chordKey;
+  String? selectedChord;
 
-  NotesProvider notesProvider;
-  Notes notes;
+  late NotesProvider notesProvider;
+  late Notes notes;
 
   @override
   void initState() {

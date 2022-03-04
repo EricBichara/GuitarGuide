@@ -3,27 +3,26 @@ import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
 import 'package:guitar_guide/core/notes_provider.dart';
 import 'package:guitar_guide/core/sl_factory.dart';
-import 'package:charcode/charcode.dart';
 
 class ChordProgression extends StatefulWidget {
   final String scaleKey;
   final MapEntry<String, List<int>> selectedScale;
   final Function selectChordCallback;
 
-  ChordProgression({this.scaleKey, this.selectedScale, this.selectChordCallback});
+  ChordProgression({required this.scaleKey, required this.selectedScale, required this.selectChordCallback});
 
   @override
   _ChordProgressionState createState() => _ChordProgressionState();
 }
 
 class _ChordProgressionState extends State<ChordProgression> {
-  Notes notes;
-  NotesProvider notesProvider;
+  late Notes notes;
+  late NotesProvider notesProvider;
   List<List<Map<String, List<int>>>> chords = [];
   List<String> keysForScale = [];
   List<String> scaleTone = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII'];
-  String selectedChord;
-  String selectedChordKey;
+  String? selectedChord;
+  String? selectedChordKey;
 
   @override
   void didUpdateWidget(covariant ChordProgression oldWidget) {
@@ -72,9 +71,8 @@ class _ChordProgressionState extends State<ChordProgression> {
                 BuildContext context,
                 int index,
               ) {
-
                 String name = '';
-                switch(chords[index][0].keys.first){
+                switch (chords[index][0].keys.first) {
                   case 'maj':
                     name = scaleTone[index].toUpperCase();
                     break;
@@ -90,7 +88,6 @@ class _ChordProgressionState extends State<ChordProgression> {
                   default:
                     name = scaleTone[index];
                 }
-
 
                 return Card(
                   child: Padding(
@@ -130,10 +127,12 @@ class _ChordProgressionState extends State<ChordProgression> {
                                       chords[index][innerIndex].keys.first,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
-                                        fontWeight: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                        fontWeight: chords[index][innerIndex].keys.first == selectedChord &&
+                                                keysForScale[index] == selectedChordKey
                                             ? FontWeight.bold
                                             : FontWeight.normal,
-                                        color: chords[index][innerIndex].keys.first == selectedChord && keysForScale[index] == selectedChordKey
+                                        color: chords[index][innerIndex].keys.first == selectedChord &&
+                                                keysForScale[index] == selectedChordKey
                                             ? Colors.blue.shade300
                                             : Colors.white,
                                         fontSize: 16,

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:guitar_guide/core/my_styles.dart';
 import 'package:guitar_guide/core/notes.dart';
@@ -9,10 +7,10 @@ import 'package:guitar_guide/core/sl_factory.dart';
 import 'package:guitar_guide/widgets/settings_dialog.dart';
 
 class Board extends StatefulWidget {
-  final String musicKey;
-  final String chord;
-  final String scale;
-  final bool showChord;
+  final String? musicKey;
+  final String? chord;
+  final String? scale;
+  final bool? showChord;
 
   Board({this.musicKey, this.chord, this.scale, this.showChord});
 
@@ -35,10 +33,10 @@ class _BoardState extends State<Board> {
   Color red = Color.fromRGBO(214, 40, 40, 1);
   Color orange = Color.fromRGBO(247, 127, 0, 1);
 
-  Notes notes;
-  NotesProvider notesProvider;
+  late Notes notes;
+  late NotesProvider notesProvider;
 
-  SettingsProvider settingsProvider;
+  late SettingsProvider settingsProvider;
 
   List<String> getNotesForString(String stringKey, List<String> noteList) {
     int currentIndex = noteList.indexOf(stringKey);
@@ -83,19 +81,19 @@ class _BoardState extends State<Board> {
     });
 
     highlightedNotes.clear();
-    List<String> notesForKey = getNotesForString(widget.musicKey, _notesOrg);
+    List<String> notesForKey = getNotesForString(widget.musicKey!, _notesOrg);
 
-    if (widget.showChord) {
-      notes.chords[widget.chord].forEach((int index) {
+    if (widget.showChord != null) {
+      notes.chords[widget.chord]!.forEach((int index) {
         highlightedNotes.add(notesForKey[index - 1]);
       });
     } else {
-      notes.scales[widget.scale].forEach((int index) {
+      notes.scales[widget.scale]!.forEach((int index) {
         highlightedNotes.add(notesForKey[index - 1]);
       });
     }
 
-    chordFormula = notes.getChordFormula(widget.chord);
+    chordFormula = notes.getChordFormula(widget.chord!);
     createNoteIntervalMap();
   }
 
@@ -123,8 +121,7 @@ class _BoardState extends State<Board> {
               SizedBox(
                 width: 30,
               ),
-              FlatButton(
-                color: Colors.deepPurpleAccent,
+              TextButton(
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -184,7 +181,7 @@ class _BoardState extends State<Board> {
     );
   }
 
-  Widget _getNoteSquare(String note, String interval, int fret) {
+  Widget _getNoteSquare(String note, String? interval, int fret) {
     bool highlight = highlightedNotes.indexOf(note) != -1;
 
     Border cellBorder;
@@ -218,7 +215,7 @@ class _BoardState extends State<Board> {
         border: cellBorder,
       ),
       child: Text(
-        settingsProvider.showInterval && highlight ? interval : note,
+        settingsProvider.showInterval && highlight ? interval ?? '' : note,
         style: TextStyle(color: highlight ? Colors.white : Colors.black),
       ),
     );
