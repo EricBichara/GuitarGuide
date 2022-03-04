@@ -30,8 +30,9 @@ jobs:
         git init
         git config user.name  "CI"
         git config user.email "flutter-ci@github.com"
-        git remote add secure-origin https://${{secrets.MY_SECRET}}@github.com/EricBichara/GuitarGuide.git
-        git checkout -b gh-pages
-        git add .
-        git commit -m "Updated docs"
-        git push --force secure-origin gh-pages
+
+    - name: Force push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{secrets.MY_SECRET}}
+        branch: "gh-pages"
